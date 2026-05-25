@@ -9,61 +9,77 @@ const DESTINATION_EMAIL = "ouedraogoalicia22@gmail.com";
 
 const PACKS = [
   {
-    id: "starter",
-    name: "Pack Starter",
-    tagline: "Idéal pour démarrer sa présence digitale",
+    id: "individuel",
+    name: "Pack Individuel",
+    price: "Sur devis",
+    tagline: "Une seule plateforme — TikTok, Instagram OU Facebook",
     items: [
-      "2 affiches professionnelles / semaine",
-      "1 tweet stratégique / semaine",
-      "Stories quotidiennes (5j/7)",
-      "Suivi mensuel + reçu de travail",
+      "3 postes/sem dont 2 affiches + 1 tweet",
+      "OU 3 publications/sem + stories chaque jour + tweets interactifs",
+      "OU 3 posts/sem + tweets interactifs",
+      "(Le client coche son option)",
     ],
   },
   {
-    id: "essentiel",
-    name: "Pack Essentiel",
-    tagline: "Pour structurer sa communication",
+    id: "duo",
+    name: "Pack Duo",
+    price: "Sur devis",
+    tagline: "Deux plateformes au choix",
     items: [
-      "4 affiches + 3 tweets / semaine",
-      "Contenus interactifs (sondages, quiz)",
-      "Stories quotidiennes 7j/7",
-      "1 vidéo courte / mois",
+      "Duo Instagram + TikTok",
+      "Duo TikTok + Facebook",
+      "Duo Instagram + Facebook",
+    ],
+  },
+  {
+    id: "minimum-duo",
+    name: "Pack Minimum Duo",
+    price: "65 000 FCFA ≈ 800 DH / mois",
+    tagline: "Pack standard duo — Spécial petites PME",
+    items: [
+      "Gestion de 2 réseaux sociaux",
+      "Contenu adapté aux besoins de la PME",
+      "Convention + reçu de travail mensuel",
+    ],
+  },
+  {
+    id: "standard-trio",
+    name: "Pack Standard Trio",
+    price: "120 000 FCFA / mois",
+    tagline: "Facebook + TikTok + Instagram — Notre pack phare",
+    items: [
+      "3 publications / jour",
+      "Stories tous les jours",
+      "Tweets interactifs quotidiens sur les 3 réseaux",
       "Cahier de charges personnalisé",
-    ],
-  },
-  {
-    id: "premium",
-    name: "Pack Premium",
-    tagline: "Pour scaler son image de marque",
-    items: [
-      "Publications illimitées (planning sur-mesure)",
-      "Tweets interactifs quotidiens",
-      "Stories + Reels quotidiens",
-      "Community management complet",
-      "KPI et évaluation mensuelle détaillée",
-      "Accompagnement stratégique dédié",
     ],
   },
 ];
 
 const SERVICES_PLUS = [
-  "Création de site web vitrine (renouvellement annuel)",
-  "Création de site e-commerce",
-  "Identité visuelle (logo, charte graphique)",
-  "Campagnes publicitaires (Meta Ads, Google Ads)",
-  "Shooting photo / vidéo professionnel",
-  "Montage vidéo & motion design",
-  "Gestion de crise digitale",
-  "Formation réseaux sociaux",
+  { name: "Gestion YouTube (montage, générique, sous-titres, logo)", price: "+150 000 FCFA/mois" },
+  { name: "Gestion LinkedIn (8 posts/mois)", price: "+40 000 FCFA/mois" },
+  { name: "Gestion WhatsApp Business", price: "Sur devis" },
+  { name: "Shooting photo pro à usage libre", price: "75 000 FCFA" },
+  { name: "Shooting pour pages gérées", price: "50 000 FCFA/mois" },
+  { name: "Vidéo pro (standards internationaux)", price: "75 000 FCFA/vidéo" },
+  { name: "Pack 2 vidéos/mois (client externe)", price: "35 000 FCFA" },
+  { name: "Pack 2 vidéos/mois (si on gère vos pages)", price: "20 000 FCFA" },
+  { name: "Création site web + hébergement 1 an (renouvelable)", price: "Sur devis" },
+  { name: "Stratégie digitale + conseil IT (client existant)", price: "Dès 45 000 FCFA/mois" },
+  { name: "Stratégie complète + charte graphique (externe)", price: "65 000 FCFA/mois" },
+  { name: "Charte graphique / identité visuelle", price: "Sur devis" },
+  { name: "Création CV professionnel", price: "Sur devis" },
+  { name: "Campagne publicitaire (Meta / Google Ads)", price: "Sur devis" },
 ];
 
 const PROFILS = [
-  "PME / Entreprise",
+  "PME / TPE",
+  "Grande entreprise / Institution",
   "Artiste / Musicien",
   "Influenceur / Créateur",
   "Marque personnelle",
   "Association / ONG",
-  "Autre",
 ];
 
 const OBJECTIFS = [
@@ -233,7 +249,7 @@ function Convention() {
               <p className="text-sm text-muted-foreground">
                 Tous nos packs incluent un cahier de charges personnalisé, un reçu de travail mensuel et l'évaluation des KPI.
               </p>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {PACKS.map((p) => {
                   const selected = form.pack === p.name;
                   return (
@@ -254,6 +270,7 @@ function Convention() {
                       )}
                       <h3 className="gold-text text-xl font-bold">{p.name}</h3>
                       <p className="mt-1 text-xs italic text-muted-foreground">{p.tagline}</p>
+                      <p className="mt-2 text-sm font-bold text-primary">{p.price}</p>
                       <ul className="mt-4 space-y-2 text-sm">
                         {p.items.map((it) => (
                           <li key={it} className="flex gap-2">
@@ -276,24 +293,27 @@ function Convention() {
               <p className="text-sm text-muted-foreground">Sélectionnez les services "Plus" qui complètent votre pack.</p>
               <div className="grid gap-2 md:grid-cols-2">
                 {SERVICES_PLUS.map((s) => {
-                  const sel = form.servicesPlus.includes(s);
+                  const sel = form.servicesPlus.includes(s.name);
                   return (
                     <button
                       type="button"
-                      key={s}
-                      onClick={() => toggleArr("servicesPlus", s)}
-                      className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all ${
+                      key={s.name}
+                      onClick={() => toggleArr("servicesPlus", s.name)}
+                      className={`flex items-start gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all ${
                         sel ? "border-primary bg-primary/10" : "border-border bg-input/40 hover:border-primary/40"
                       }`}
                     >
                       <span
-                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border ${
+                        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
                           sel ? "border-primary bg-primary text-primary-foreground" : "border-border"
                         }`}
                       >
                         {sel && "✓"}
                       </span>
-                      {s}
+                      <span className="flex-1">
+                        <span className="block">{s.name}</span>
+                        <span className="mt-0.5 block text-xs font-semibold text-primary">{s.price}</span>
+                      </span>
                     </button>
                   );
                 })}
@@ -427,8 +447,11 @@ function Convention() {
           )}
         </form>
 
+        <div className="mt-8 rounded-xl border-2 border-primary/50 bg-primary/5 p-5 text-sm font-bold text-foreground">
+          <span className="text-primary">⚠ Note importante :</span> Tous les tarifs présentés sont établis pour les <strong>PME (Petites et Moyennes Entreprises)</strong>. Pour les <strong>grandes institutions et structures internationales</strong>, un cahier de charges personnalisé est établi en fonction des besoins spécifiques et des livrables demandés — les tarifs diffèrent en conséquence.
+        </div>
         <footer className="mt-10 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} LG DIGITAL — Politique de travail professionnelle & confidentielle
+          © {new Date().getFullYear()} LG DIGITAL — Lise Group Digital · Politique de travail professionnelle & confidentielle
         </footer>
       </div>
     </main>
