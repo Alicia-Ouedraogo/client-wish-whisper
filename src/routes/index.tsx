@@ -249,7 +249,7 @@ function Convention() {
               <p className="text-sm text-muted-foreground">
                 Tous nos packs incluent un cahier de charges personnalisé, un reçu de travail mensuel et l'évaluation des KPI.
               </p>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {PACKS.map((p) => {
                   const selected = form.pack === p.name;
                   return (
@@ -270,6 +270,7 @@ function Convention() {
                       )}
                       <h3 className="gold-text text-xl font-bold">{p.name}</h3>
                       <p className="mt-1 text-xs italic text-muted-foreground">{p.tagline}</p>
+                      <p className="mt-2 text-sm font-bold text-primary">{p.price}</p>
                       <ul className="mt-4 space-y-2 text-sm">
                         {p.items.map((it) => (
                           <li key={it} className="flex gap-2">
@@ -292,24 +293,27 @@ function Convention() {
               <p className="text-sm text-muted-foreground">Sélectionnez les services "Plus" qui complètent votre pack.</p>
               <div className="grid gap-2 md:grid-cols-2">
                 {SERVICES_PLUS.map((s) => {
-                  const sel = form.servicesPlus.includes(s);
+                  const sel = form.servicesPlus.includes(s.name);
                   return (
                     <button
                       type="button"
-                      key={s}
-                      onClick={() => toggleArr("servicesPlus", s)}
-                      className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all ${
+                      key={s.name}
+                      onClick={() => toggleArr("servicesPlus", s.name)}
+                      className={`flex items-start gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all ${
                         sel ? "border-primary bg-primary/10" : "border-border bg-input/40 hover:border-primary/40"
                       }`}
                     >
                       <span
-                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border ${
+                        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
                           sel ? "border-primary bg-primary text-primary-foreground" : "border-border"
                         }`}
                       >
                         {sel && "✓"}
                       </span>
-                      {s}
+                      <span className="flex-1">
+                        <span className="block">{s.name}</span>
+                        <span className="mt-0.5 block text-xs font-semibold text-primary">{s.price}</span>
+                      </span>
                     </button>
                   );
                 })}
