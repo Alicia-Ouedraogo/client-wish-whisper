@@ -447,8 +447,11 @@ function Convention() {
           )}
         </form>
 
+        <div className="mt-8 rounded-xl border-2 border-primary/50 bg-primary/5 p-5 text-sm font-bold text-foreground">
+          <span className="text-primary">⚠ Note importante :</span> Tous les tarifs présentés sont établis pour les <strong>PME (Petites et Moyennes Entreprises)</strong>. Pour les <strong>grandes institutions et structures internationales</strong>, un cahier de charges personnalisé est établi en fonction des besoins spécifiques et des livrables demandés — les tarifs diffèrent en conséquence.
+        </div>
         <footer className="mt-10 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} LG DIGITAL — Politique de travail professionnelle & confidentielle
+          © {new Date().getFullYear()} LG DIGITAL — Lise Group Digital · Politique de travail professionnelle & confidentielle
         </footer>
       </div>
     </main>
